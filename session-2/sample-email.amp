@@ -1,0 +1,607 @@
+%%[
+  var @salutation
+  set @salutation = ProperCase(FirstName)
+  if Empty(@salutation) then
+    set @salutation = "Hey there"
+  Endif
+
+  /* Product Information */
+  var @productName, @productImageURL, @productURL, @productHandle
+  
+  set @productName = "Camiseta México"
+  set @productImageURL = "https://cdn.shopify.com/s/files/1/2399/8125/products/mexico.jpeg?v=1506554147"
+  set @productHandle = "mexico-national-team-federation-t-shirt-green"
+  set @productURL = Concat("https://demo-fultbolshop.myshopify.com/products/", @productHandle)
+  
+  var @abandonedCartDetails, @cartDetail
+  set @abandonedCartDetails = LookupOrderedRows("AbandonBasketDetails", 1, "UnitPrice DESC", "BasketID", BasketID)
+  IF RowCount(@abandonedCartDetails) > 0 THEN
+     set @cartDetail = ROW(@abandonedCartDetails,1)
+     set @productID = Field(@cartDetail,"PID") 
+     set @products = LookupRows("ProductCatalog", "PID", @productID)
+     IF RowCount(@products) > 0 THEN
+         set @productRow = Row(@products,1)
+         set @productName = Field(@productRow,"Name")
+         set @productImageUrl = Field(@productRow,"ImageURL")
+         set @productHandle = Field(@productRow,"Handle")
+         set @productURL = Concat("https://demo-fultbolshop.myshopify.com/products/", @productHandle)
+     ENDIF
+  ENDIF
+]%%
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Official Online Store</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--[if !mso]><!-->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css' />
+    <!--<![endif]-->
+    <style type="text/css">
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            -webkit-text-size-adjust: 100% !important;
+            -ms-text-size-adjust: 100% !important;
+            -webkit-font-smoothing: antialiased !important;
+        }
+
+        img {
+            border: 0 !important;
+            outline: none !important;
+            display: block !important;
+        }
+
+        p {
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+
+        table {
+            border-collapse: collapse;
+            mso-table-lspace: 0px;
+            mso-table-rspace: 0px;
+        }
+
+        td,
+        a,
+        span {
+            border-collapse: collapse;
+            mso-line-height-rule: exactly;
+        }
+
+        .ExternalClass * {
+            line-height: 100%;
+        }
+
+        .em_white a {
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
+
+        .em_real a {
+            color: #8e8e8e !important;
+            text-decoration: none !important;
+        }
+
+        .em_get a {
+            color: #333333 !important;
+            text-decoration: none !important;
+        }
+
+        .em_copy_right a {
+            color: #999999 !important;
+            text-decoration: none !important;
+        }
+
+        .em_main_table {
+            width: 600px;
+        }
+
+        /*Stylesheed for the devices width between 481px to 600px*/
+        @media only screen and (min-width:481px) and (max-width:600px) {
+            table[class=em_main_table] {
+                width: 480px !important;
+            }
+
+            table[class=em_wrapper] {
+                width: 100% !important;
+            }
+
+            td[class=em_spacer],
+            img[class=em_spacer] {
+                width: 10px !important;
+            }
+
+            td[class=em_hide],
+            table[class=em_hide],
+            span[class=em_hide],
+            br[class=em_hide] {
+                display: none !important;
+            }
+
+            img[class=em_full_img] {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            td[class=em_pad_mob] {
+                padding-top: 15px !important;
+            }
+
+            td[class=em_pad_top] {
+                padding-top: 20px !important;
+            }
+
+            td[class=em_height],
+            img[class=em_height] {
+                height: 20px !important;
+            }
+
+            td[class=em_txt_dvd] {
+                text-align: center !important;
+            }
+        }
+
+        /*Stylesheed for the devices width between 0px to 480px*/
+        @media only screen and (max-width:480px) {
+            table[class=em_main_table] {
+                width: 100% !important;
+            }
+
+            table[class=em_wrapper] {
+                width: 100% !important;
+            }
+
+            td[class=em_spacer],
+            img[class=em_spacer] {
+                width: 10px !important;
+            }
+
+            td[class=em_hide],
+            table[class=em_hide],
+            span[class=em_hide],
+            br[class=em_hide] {
+                display: none !important;
+            }
+
+            img[class=em_full_img] {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            td[class=em_pad_top] {
+                padding-top: 20px !important;
+            }
+
+            td[class=em_pad_mob] {
+                padding-top: 15px !important;
+            }
+
+            td[class=em_height],
+            img[class=em_height] {
+                height: 20px !important;
+            }
+
+            td[class=em_txt_dvd] {
+                text-align: center !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin:0px; padding:0px;" bgcolor="#ffffff">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#ffffff">
+        <tr>
+            <td align="center" valign="top">
+                <table width="600" border="0" align="center" cellpadding="0" cellspacing="0" class="em_main_table"
+                    style="table-layout:fixed;">
+                    <tr>
+                        <td align="left" valign="top">
+                            <table width="600" border="0" align="center" cellpadding="0" cellspacing="0"
+                                class="em_main_table">
+                                <tr>
+                                    <td width="25" class="em_hide"><img
+                                            src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                            width="25" height="1" alt="" border="0" style="display:block;" /></td>
+                                    <td align="left" valign="top">
+                                        <table width="575" border="0" cellspacing="0" cellpadding="0" align="center"
+                                            class="em_wrapper">
+                                            <tr>
+                                                <td align="left" valign="top">
+                                                    <table width="148" border="0" align="left" cellpadding="0"
+                                                        cellspacing="0" class="em_wrapper">
+                                                        <tr>
+                                                            <td height="10" style="line-height:0px; font-size:0px;"
+                                                                class="em_height"><img class="em_height"
+                                                                    src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                    width="1" height="10" alt="" border="0"
+                                                                    style="display:block;" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" valign="top"><a
+                                                                    href="https://demo-fultbolshop.myshopify.com/"
+                                                                    target="_blank"><img
+                                                                        src="https://cdn.shopify.com/s/files/1/2399/8125/files/d8e04903-769b-4d09-a8f1-0bb86992570d_360x.png?v=1517057478"
+                                                                        width="148" alt="Official Online Store"
+                                                                        border="0" style="display:block;" /></a></td>
+                                                        </tr>
+                                                    </table>
+                                                    <table width="305" border="0" align="right" cellpadding="0"
+                                                        cellspacing="0" class="em_wrapper">
+                                                        <tr>
+                                                            <td align="left" valign="top" class="em_pad_top">
+                                                                <table width="275" border="0" align="right"
+                                                                    cellpadding="0" cellspacing="0" class="em_wrapper">
+                                                                    <tr>
+                                                                        <td width="11" align="left" valign="top"
+                                                                            style="line-height:0px; font-size:0px;"
+                                                                            class="em_hide"> </td>
+                                                                        <td height="24" align="center" valign="middle"
+                                                                            bgcolor="#666666" class="em_white"
+                                                                            style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#ffffff; text-align:center; line-height:normal; font-size:13px;">
+                                                                            <a href="https://demo-fultbolshop.myshopify.com/"
+                                                                                target="_blank"
+                                                                                style="text-decoration:none; color:#ffffff;">NEW
+                                                                                ARRIVALS</a> | <a
+                                                                                href="https://demo-fultbolshop.myshopify.com/products/argentina-national-team-federation-t-shirt-white-light-blue"
+                                                                                target="_blank"
+                                                                                style="text-decoration:none; color:#ffffff;">TRAINING</a>
+                                                                            | <a href="https://demo-fultbolshop.myshopify.com/products/argentina-national-team-federation-t-shirt-white-light-blue"
+                                                                                target="_blank"
+                                                                                style="text-decoration:none; color:#ffffff;">FASHION</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td height="25" class="em_height"><img class="em_height"
+                                                                    src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                    width="1" height="25" alt="" border="0"
+                                                                    style="display:block;" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="left" valign="top">
+                                                                <table width="305" border="0" cellspacing="0"
+                                                                    cellpadding="0" class="em_wrapper">
+                                                                    <tr>
+                                                                        <td align="right" valign="top"
+                                                                            style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#666666; text-align:right; line-height:normal; font-size:14px;">
+                                                                            %%=v(@salutation)=%%, TIME TO <strong>SAVE
+                                                                                10%</strong></td>
+                                                                        <td width="25" class="em_hide"><img
+                                                                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                width="1" height="10" alt="" border="0"
+                                                                                style="display:block;" /></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10" style="line-height:0px; font-size:0px;"><img
+                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                width="1" height="10" alt="" border="0" style="display:block;" /></td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top">
+                            <table width="600" border="0" align="center" cellpadding="0" cellspacing="0"
+                                class="em_main_table">
+                                <tr>
+                                    <td width="15" class="em_spacer"><img class="em_spacer"
+                                            src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                            width="15" height="1" alt="" border="0" style="display:block;" /></td>
+                                    <td align="left" valign="top">
+                                        <table width="570" border="0" align="center" cellpadding="0" cellspacing="0"
+                                            class="em_wrapper">
+                                            <tr>
+                                                <td height="1" style="line-height:0px; font-size:0px;"
+                                                    bgcolor="#414141"><img
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="" alt="" border="0" style="display:block;" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="10" style="line-height:0px; font-size:0px;"
+                                                    class="em_height"><img class="em_height"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="10" alt="" border="0"
+                                                        style="display:block;" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" valign="top">
+                                                    <table width="570" border="0" align="center" cellpadding="0"
+                                                        cellspacing="0" class="em_wrapper">
+                                                        <tr>
+                                                            <td align="left" valign="top">
+                                                                <table width="243" border="0" align="right"
+                                                                    cellpadding="0" cellspacing="0" class="em_wrapper">
+                                                                    <tr>
+                                                                        <td align="center" valign="top"><a
+                                                                                href="https://demo-fultbolshop.myshopify.com/"
+                                                                                target="_blank"><img
+                                                                                    src="%%=v(@productImageURL)=%%"
+                                                                                    width="256" height="256"
+                                                                                    alt="%%=v(@productName)=%%"
+                                                                                    border="0"
+                                                                                    style="display:block;" /></a></td>
+
+                                                                </table>
+                                                                <table width="305" border="0" align="left"
+                                                                    cellpadding="0" cellspacing="0" class="em_wrapper">
+                                                                    <tr>
+                                                                        <td height="15"
+                                                                            style="line-height:0px; font-size:0px;"
+                                                                            class="em_height"><img
+                                                                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                width="1" height="15" alt="" border="0"
+                                                                                style="display:block;" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" valign="top" class="em_txt_dvd"
+                                                                            style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#0255a5; font-size:58px; font-weight:bold; line-height:60px; text-align:left;">
+                                                                            SAVE 10%&gt;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td height="20"
+                                                                            style="line-height:0px; font-size:0px;"><img
+                                                                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                width="1" height="20" alt="" border="0"
+                                                                                style="display:block;" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" valign="top" class="em_txt_dvd"
+                                                                            style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#666666; text-align:left; line-height:30px; font-size:26px;">
+                                                                            COMPLETE YOUR ORDER<br class="em_hide" />
+                                                                            NOW AND <strong>SAVE 10%</strong> ON </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td height="15"
+                                                                            style="line-height:0px; font-size:0px;"><img
+                                                                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                width="1" height="15" alt="" border="0"
+                                                                                style="display:block;" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" valign="top"
+                                                                            style="font-family:&#39;Trebuchet MS&#39;, Arial, Helvetica, sans-serif; color:#0255a5; font-size:20px; line-height:25px; text-align:left;">
+                                                                            <a href="https://demo-fultbolshop.myshopify.com/"
+                                                                                title="Product Name" target="_blank"
+                                                                                style="color:#0255a5;text-decoration:none;">%%=v(@productName)=%%</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td height="15"
+                                                                            style="line-height:0px; font-size:0px;"><img
+                                                                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                width="1" height="15" alt="" border="0"
+                                                                                style="display:block;" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" valign="top">
+                                                                            <table width="305" border="0" align="center"
+                                                                                cellpadding="0" cellspacing="0"
+                                                                                class="em_wrapper">
+                                                                                <tr>
+                                                                                    <td align="center" valign="top">
+                                                                                        <table width="280" border="0"
+                                                                                            align="center"
+                                                                                            cellpadding="0"
+                                                                                            cellspacing="0"
+                                                                                            bgcolor="#CCCccc">
+                                                                                            <tr>
+                                                                                                <td height="15"
+                                                                                                    style="line-height:0px; font-size:0px;">
+                                                                                                    <img src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                                        width="1"
+                                                                                                        height="15"
+                                                                                                        alt=""
+                                                                                                        border="0"
+                                                                                                        style="display:block;" />
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td align="left"
+                                                                                                    valign="top">
+                                                                                                    <table width="280"
+                                                                                                        border="0"
+                                                                                                        cellspacing="0"
+                                                                                                        cellpadding="0"
+                                                                                                        align="center">
+                                                                                                        <tr>
+                                                                                                            <td align="right"
+                                                                                                                valign="middle"
+                                                                                                                class="em_get"
+                                                                                                                style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#333333; font-weight:bold; text-align:right; line-height:normal; font-size:18px;">
+                                                                                                                <a href="%%=RedirectTo(@productURL)=%%"
+                                                                                                                    target="_blank"
+                                                                                                                    style="text-decoration:none; display:block; color:#333333;">GET
+                                                                                                                    IT
+                                                                                                                    BEFORE
+                                                                                                                    IT&rsquo;S
+                                                                                                                    GONE!</a>
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                width="8">
+                                                                                                                <img src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                                                    width="8"
+                                                                                                                    height="1"
+                                                                                                                    alt=""
+                                                                                                                    border="0"
+                                                                                                                    style="display:block;" />
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                width="6">
+                                                                                                                <a href="https://demo-fultbolshop.myshopify.com/"
+                                                                                                                    target="_blank"></a>
+                                                                                                            </td>
+                                                                                                            <td width="20"
+                                                                                                                bgcolor="#cccccc">
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td height="15"
+                                                                                                    style="line-height:0px; font-size:0px;">
+                                                                                                    <img src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                                        width="1"
+                                                                                                        height="15"
+                                                                                                        alt=""
+                                                                                                        border="0"
+                                                                                                        style="display:block;" />
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                    <td width="25" class="em_hide"><img
+                                                                                            src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                                                            width="1" height="15" alt=""
+                                                                                            border="0"
+                                                                                            style="display:block;" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="12" style="line-height:0px; font-size:0px;"
+                                                    class="em_height"><img class="em_height"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="12" alt="" border="0"
+                                                        style="display:block;" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" valign="top"
+                                                    style="font-family:&#39;Trebuchet MS&#39;, Arial, sans-serif; color:#666666; text-align:center; line-height:22px; font-size:18px;">
+                                                    STILL THINKING IT OVER ? <strong>EXPLORE OUR UPCOMING SALE
+                                                        EVENTS!</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="12" style="line-height:0px; font-size:0px;"
+                                                    class="em_height"><img class="em_height"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="12" alt="" border="0"
+                                                        style="display:block;" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+              
+                                                            <tr>
+
+                                                                <td width="280" valign="top"
+                                                                    style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 16px; color: #37281c;">
+                                                                    
+                                                                    %%[
+                                                                        set @events = LookupOrderedRows("Events",4,"EventDate ASC","Query",1)
+                                                                        IF rowcount(@events) > 0 THEN
+                                                                           FOR @index = 1 TO rowcount(@events) DO
+                                                                             set @event = Row(@events, @index)
+                                                                             set @eventName = Field(@event,"EventName")
+                                                                             set @eventPromoCode = Field(@event,"EventPromoCode")
+                                                                             set @eventDate = Field(@event,"EventDate")
+                                                                  
+                                                                    ]%%
+                                                                    <span style="color: #0255A5;"><strong>%%=v(@eventName)=%%</strong></span><br>
+                                                                    <strong>When:</strong>%%=Format(@eventDate,"MM/dd/yyyy")=%%<br>
+                                                                    <strong>Use Promo Code:</strong>%%=v(@eventPromoCode)=%%<br>
+                                                                    <br>
+                                                                    <br>
+                                                                    %%[
+                                                                           NEXT @index 
+ 1                                                                      ENDIF
+                                                                    ]%%
+                                                                    
+
+                                                                </td>
+                                                                <td width="280" valign="top"
+                                                                    style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 16px; color: #37281c;">
+                                                                    <span style="color: #0255A5;"><strong>[Event 3
+                                                                            Name]</strong></span><br>
+                                                                    <strong>When:</strong> [Event 3 time]<br>
+                                                                    <strong>Use Promo Code:</strong> [Event 3 promo
+                                                                    code]<br>
+                                                                    <br>
+                                                                    <br>
+                                                                    <strong><span style="color: #0255A5;">[Event 4
+                                                                            Name]</span></strong><br>
+                                                                    <strong>When:</strong> [Event 4 time]<br>
+                                                                    <strong>Use Promo Code:</strong> [Event 4 promo
+                                                                    code]<br>
+
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="14" style="line-height:0px; font-size:0px;"
+                                                    class="em_height"><img class="em_height"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="14" alt="" border="0"
+                                                        style="display:block;" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" valign="top" style="line-height:0px; font-size:0px;">
+                                                    <img class="em_full_img"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/e242ddf9-490a-4f2a-b0e7-398a71c8cf4b.png"
+                                                        width="570" height="2" alt="" border="0"
+                                                        style="display:block;" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="8" style="line-height:0px; font-size:0px;"
+                                                    class="em_height"><img class="em_height"
+                                                        src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                                        width="1" height="8" alt="" border="0" style="display:block;" />
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                    <td width="15" class="em_spacer"><img class="em_spacer"
+                                            src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                            width="15" height="1" alt="" border="0" style="display:block;" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="em_hide" height="1" bgcolor="#ffffff" style="line-height:1px; min-width: 600px;"><img
+                                src="https://image.s7.sfmc-content.com/lib/fe8d13727c62017f76/m/1/328efe9a-b0bb-49cf-ae00-02e3f2c0d9f9.gif"
+                                width="600" height="1" alt=""
+                                style="max-height:1px; min-height:1px; display:block; width:600px; min-width:600px;"
+                                border="0" /></td>
+                    </tr>
+                </table>
+              <table cellpadding="2" cellspacing="0" width="600" ID="Table5" Border=0><tr><td><font face="verdana" size="1" color="#444444">This email was sent by: <b>%%Member_Busname%%</b><br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br><br></font></td></tr></table>
+              <a href="%%profile_center_url%%" alias="Update Profile">Update Profile</a>
+            </td>
+        </tr>
+    </table>
+    <div style="display:none; white-space:nowrap; font:20px courier; color:#ffffff;">- - - - - - - - - - - - - - - - - -
+        - - - -</div>
+</body>
+
+</html>
+<custom name="opencounter" type="tracking">
