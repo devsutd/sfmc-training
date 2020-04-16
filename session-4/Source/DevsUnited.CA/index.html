@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.3/require.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--Tokenize-->
+    <link rel="stylesheet" href="Content/tokenize2.min.css" />
+    <link rel="stylesheet" href="Content/select2.css" />
+    <!-- LightCloud Styles -->
+    <!--<link rel="stylesheet" href="Content/sf-lightning/assets/styles/sf-lightning.css">-->
+    <link rel="stylesheet" href="Content/styles_slds.css">
+    <script type="text/javascript">
+        (function () {
+            var config = {
+                baseUrl: 'js',
+                urlsArgs: 'bust=' +  (new Date()).getTime()
+            };
+
+            var dependencies = [
+                'customActivity',
+                'tokenize2',
+                'select2'
+            ];
+
+            require(config, dependencies);
+        })();
+    </script>
+
+    <!--Styles-->
+    <style type="text/css">
+        body {
+            padding: 20px;
+            margin: 0;
+        }
+
+        .step {
+            display: none;
+        }
+
+        #step1 {
+            display: block;
+        }
+
+        #overlay {	
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            height:100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+        .cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px #ddd solid;
+            border-top: 4px #2e93e6 solid;
+            border-radius: 50%;
+            animation: sp-anime 0.8s infinite linear;
+        }
+        @keyframes sp-anime {
+            100% { 
+                transform: rotate(360deg); 
+            }
+        }
+        .is-hide {
+	        display:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="step1" class="step" style="display: block;">
+        <div class="alert alert-danger" role="alert" id="errors" style="display:none;">
+        </div>
+
+        <form class="form-horizontal">
+
+            <fieldset>
+                <!-- Text input-->
+                <div class="form-group" id="message">
+                    <label class="col-md-4 control-label" for="textinput">Message</label>
+                    <div class="col-md-4">
+                        <textarea id="message" name="message" class="form-control input-md"></textarea>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+        </div>
+</body>
+
+</html>
+
+
+

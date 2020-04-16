@@ -1,0 +1,96 @@
+/************ 
+HEADINGS
+************/
+.slds-text-heading--large {
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.slds-text-body--medium {
+    margin-bottom:30px;
+    font-size:16px;
+}
+
+.slds-box {
+    margin-top:50px;
+    padding:60px 30px;
+}
+
+.slds-table-custom {
+    margin-top: 30px;
+}
+
+.slds-button__icon--right {
+    margin-left: 0 !important;
+    margin-right: 0.5rem !important;
+}
+
+.next-icon {
+    -ms-transform: rotate(180deg) !important; /* IE 9 */
+    -webkit-transform: rotate(180deg) !important; /* Chrome, Safari, Opera */
+    transform: rotate(180deg) !important;
+}
+
+.slds-icon--x-small {
+    vertical-align: sub;
+}
+
+.slds-cursor {
+    cursor: pointer;
+}
+
+.slds-tree_container {
+    padding: 30px;
+    border: 1px solid #cbcbcb;
+}
+
+.slds-pill + .slds-pill {
+    margin-left: 0!important;
+}
+
+.slds-button__icon--right {
+    margin-right: 0 !important;
+    margin-left: 2px !important;
+}
+
+.slds-button__icon--stateful {
+    width: 1rem!important;
+    height: 1rem !important;
+}
+
+.slds-pill {
+    margin-top: 5px;
+}
+
+.slds-tree {
+    margin-top: 20px;
+}
+
+.slds-tree_container {
+    max-width: 100%;
+}
+
+.slds-button__icon--stateful {
+    margin-right: 5px !important;
+}
+
+.table-max-width {
+    max-width: 60rem !important;
+}
+
+.slds-box {
+    max-width: 82%;
+}
+
+.slds-checkbox {
+    margin-top: 5px;
+}
+
+input {
+    border:1px solid #CBCBCB!important;
+}
+
+.helper{
+    font-size:9px;
+    color: #242424;
+}
